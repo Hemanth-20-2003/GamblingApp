@@ -14,6 +14,12 @@ from .session_parameters import SessionParameters
 from .game_record import GameRecord
 from .pause_record import PauseRecord
 from .gaming_session import GamingSession
+from .odds_type import OddsType
+from .odds_config import OddsConfig
+from .game_result import GameResult
+from .win_loss_statistics import WinLossStatistics
+from .running_totals import RunningTotals
+from .outcome_strategy import RandomOutcomeStrategy, WeightedProbabilityStrategy
 
 __all__ = [
     "GamblerProfile", "BettingPreferences", "GamblerStatisticsDTO",
@@ -21,5 +27,8 @@ __all__ = [
     "StakeMonitor", "StakeHistoryReport",
     "BettingStrategy", "STRATEGIES", "Bet", "BettingSession",
     "SessionStatus", "SessionEndReason", "SessionParameters",
-    "GameRecord", "PauseRecord", "GamingSession"
+    "GameRecord", "PauseRecord", "GamingSession",
+    "OddsType", "OddsConfig", "GameResult",
+    "WinLossStatistics", "RunningTotals",
+    "RandomOutcomeStrategy", "WeightedProbabilityStrategy"
 ]
