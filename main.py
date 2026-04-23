@@ -1,44 +1,55 @@
-# use_case_1_gambler_profile.py
+# main.py
 """
-Use Case 1: Gambler Profile Management
-- Create new gambler with initial stake, win threshold, and loss threshold
-- Update gambler personal information and betting preferences
-- Retrieve gambler statistics and current financial status
-- Validate gambler eligibility based on minimum stake requirements
-- Reset gambler profile to initial state for new gaming session
-
-Updated to use reorganized package structure:
-  - models: GamblerProfile, BettingPreferences, GamblerStatisticsDTO
-  - service: GamblerProfileService
-  - config: database connection (db.py)
+Main demo file for Gambling App
+Demonstrates Use Case 2: Stake Management
 """
 
-from service import GamblerProfileService
+from service import StakeManagementService
 
 
-# ──────────────────────────────────────────────
-# Demo
-# ──────────────────────────────────────────────
+def demo_use_case_2(gambler_id=1):
+    """Use Case 2: Stake Management Operations"""
+    print("\n" + "="*60)
+    print("USE CASE 2: STAKE MANAGEMENT OPERATIONS")
+    print("="*60)
+    
+    svc = StakeManagementService()
+
+    # 1. Initialize stake
+    print("\n[1] Initializing stake with boundaries...")
+    monitor = svc.initialize_stake(gambler_id, 500.0, 1000.0, 100.0)
+    print(f"Current stake: {monitor.current_stake}")
+
+    # 2. Simulate betting
+    print("\n[2] Simulating bet outcomes...")
+    svc.calculate_after_bet(gambler_id, 50.0, won=True, payout=50.0)
+    svc.calculate_after_bet(gambler_id, 30.0, won=False)
+    svc.calculate_after_bet(gambler_id, 75.0, won=True, payout=150.0)
+
+    # 3. Monitor fluctuations
+    print("\n[3] Monitoring stake fluctuations...")
+    fluctuations = svc.monitor_fluctuations(gambler_id)
+    print(f"Fluctuations: {fluctuations}")
+
+    # 4. Validate boundaries
+    print("\n[4] Validating stake boundaries...")
+    boundaries = svc.validate_boundaries(gambler_id)
+    print(f"Boundaries: {boundaries}")
+
+    # 5. Generate report
+    print("\n[5] Generating stake history report...")
+    report = svc.generate_report(gambler_id)
+    report.print_report()
+
+
 if __name__ == "__main__":
-    svc = GamblerProfileService()
-
-    # 1. Create
-    p = svc.create_gambler("Alice", "alice@example.com",
-                           initial_stake=500.0,
-                           win_threshold=1000.0,
-                           loss_threshold=100.0)
-    print(p)
-
-    # 2. Update
-    svc.update_gambler(p.id, name="Alice Smith", max_bet=200.0)
-
-    # 3. Retrieve
-    profile, prefs, stats = svc.retrieve_gambler(p.id)
-    print(profile, prefs.__dict__, stats)
-
-    # 4. Validate
-    eligibility = svc.validate_eligibility(p.id)
-    print("Eligible:", eligibility)
-
-    # 5. Reset
-    svc.reset_gambler(p.id, new_initial_stake=600.0)
+    print("\n" + "#"*60)
+    print("# GAMBLING APP - STAKE MANAGEMENT DEMO")
+    print("#"*60)
+    
+    # Run Use Case 2
+    demo_use_case_2()
+    
+    print("\n" + "#"*60)
+    print("# DEMO COMPLETE")
+    print("#"*60 + "\n")
