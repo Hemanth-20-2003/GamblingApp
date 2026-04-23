@@ -1,54 +1,55 @@
 # main.py
 """
 Main demo file for Gambling App
-Demonstrates Use Case 2: Stake Management
+Demonstrates Use Case 3: Betting Mechanism
 """
 
-from service import StakeManagementService
+from service import BettingService
 
 
-def demo_use_case_2(gambler_id=1):
-    """Use Case 2: Stake Management Operations"""
+def demo_use_case_3(gambler_id=1):
+    """Use Case 3: Betting Mechanism"""
     print("\n" + "="*60)
-    print("USE CASE 2: STAKE MANAGEMENT OPERATIONS")
+    print("USE CASE 3: BETTING MECHANISM")
     print("="*60)
     
-    svc = StakeManagementService()
+    svc = BettingService()
 
-    # 1. Initialize stake
-    print("\n[1] Initializing stake with boundaries...")
-    monitor = svc.initialize_stake(gambler_id, 500.0, 1000.0, 100.0)
-    print(f"Current stake: {monitor.current_stake}")
+    # 1. Single bet
+    print("\n[1] Placing a single bet...")
+    bet = svc.place_bet(gambler_id, 50.0, win_probability=0.5, odds=2.0)
+    won = svc.determine_outcome(0.5)
+    print(f"Bet outcome: {'WIN' if won else 'LOSS'}")
+    svc.settle_bet(bet, won)
 
-    # 2. Simulate betting
-    print("\n[2] Simulating bet outcomes...")
-    svc.calculate_after_bet(gambler_id, 50.0, won=True, payout=50.0)
-    svc.calculate_after_bet(gambler_id, 30.0, won=False)
-    svc.calculate_after_bet(gambler_id, 75.0, won=True, payout=150.0)
+    # 2. Validate bet amount
+    print("\n[2] Validating bet amount...")
+    validation = svc.validate_bet_amount(gambler_id, 75.0)
+    print(f"Validation result: {validation}")
 
-    # 3. Monitor fluctuations
-    print("\n[3] Monitoring stake fluctuations...")
-    fluctuations = svc.monitor_fluctuations(gambler_id)
-    print(f"Fluctuations: {fluctuations}")
+    # 3. Bet with strategy
+    print("\n[3] Placing bet with Martingale strategy...")
+    strategy_bet = svc.place_bet_with_strategy(gambler_id, "MARTINGALE", 
+                                                base_bet=20.0,
+                                                win_probability=0.5)
+    won = svc.determine_outcome(0.5)
+    svc.settle_bet(strategy_bet, won)
 
-    # 4. Validate boundaries
-    print("\n[4] Validating stake boundaries...")
-    boundaries = svc.validate_boundaries(gambler_id)
-    print(f"Boundaries: {boundaries}")
-
-    # 5. Generate report
-    print("\n[5] Generating stake history report...")
-    report = svc.generate_report(gambler_id)
-    report.print_report()
+    # 4. Multiple consecutive bets
+    print("\n[4] Placing 5 consecutive bets...")
+    session = svc.place_consecutive_bets(gambler_id, count=5, 
+                                         bet_amount=30.0,
+                                         win_probability=0.48)
+    print(f"Session summary: {session.summary()}")
 
 
 if __name__ == "__main__":
     print("\n" + "#"*60)
-    print("# GAMBLING APP - STAKE MANAGEMENT DEMO")
+    print("# GAMBLING APP - BETTING MECHANISM DEMO")
     print("#"*60)
     
-    # Run Use Case 2
-    demo_use_case_2()
+    # Run Use Case 3
+    demo_use_case_3()
     
     print("\n" + "#"*60)
     print("# DEMO COMPLETE")

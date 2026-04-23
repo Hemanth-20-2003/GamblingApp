@@ -6,9 +6,13 @@ from .stake_transaction import StakeTransaction
 from .stake_boundary import StakeBoundary
 from .stake_monitor import StakeMonitor
 from .stake_history_report import StakeHistoryReport
+from .betting_strategy import BettingStrategy, STRATEGIES
+from .bet import Bet
+from .betting_session import BettingSession
 
 __all__ = [
     "GamblerProfile", "BettingPreferences", "GamblerStatisticsDTO",
     "TransactionType", "StakeTransaction", "StakeBoundary",
-    "StakeMonitor", "StakeHistoryReport"
+    "StakeMonitor", "StakeHistoryReport",
+    "BettingStrategy", "STRATEGIES", "Bet", "BettingSession"
 ]
