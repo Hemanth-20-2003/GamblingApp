@@ -20,6 +20,8 @@ from .game_result import GameResult
 from .win_loss_statistics import WinLossStatistics
 from .running_totals import RunningTotals
 from .outcome_strategy import RandomOutcomeStrategy, WeightedProbabilityStrategy
+from .validation_result import ValidationResult
+from .validation_config import ValidationConfig
 
 __all__ = [
     "GamblerProfile", "BettingPreferences", "GamblerStatisticsDTO",
@@ -30,5 +32,6 @@ __all__ = [
     "GameRecord", "PauseRecord", "GamingSession",
     "OddsType", "OddsConfig", "GameResult",
     "WinLossStatistics", "RunningTotals",
-    "RandomOutcomeStrategy", "WeightedProbabilityStrategy"
+    "RandomOutcomeStrategy", "WeightedProbabilityStrategy",
+    "ValidationResult", "ValidationConfig"
 ]
